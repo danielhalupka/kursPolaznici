@@ -1,0 +1,47 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input name="imeSearchFilter" class="form-control" [(ngModel)]="imeSearchFilter" (ngModelChange)="resetCurrentPage()" type="text"
+            placeholder="Ime ili prezime polaznika" />
+        </div>
+      </form>
+      <form class="navbar-form navbar-right">
+        <div class="form-group" style="padding: 6px;">
+          <div class="checkbox checkbox-primary">
+            <input name="predavacFilter" id="predavacFilter" type="checkbox" (ngModelChange)="resetCurrentPage()" [(ngModel)]="predavacFilterVal">
+            <label for="predavacFilter" style="color:white">
+              Predavač
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<h3 class="col-md-12 text-center">Polaznici kursa</h3>
+
+<div class="col-md-12">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let polaznik of polazniciModel.polaznici | imeFilter:imeSearchFilter |  predavacFilter:predavacFilterVal | paginationFilter:perPage:currentPage"
+      (click)="selektujPolaznika(polaznik)">{{polaznik.ime}}&nbsp;{{polaznik.prezime}}</li>
+  </ul>
+</div>
+
+<ul class="pagination col-sm-12 text-center">
+  <li (click)="previousPage()">
+    <button class="btn btn-info">Previous</button>
+  </li>
+  <li *ngFor="let page of pagerConstruct((polazniciModel.polaznici | imeFilter:imeSearchFilter | predavacFilter:predavacFilterVal).length/perPage)"
+    (click)="switchPage(page)">
+    <button class="btn btn-info">{{page+1}}</button>
+  </li>
+  <li (click)="nextPage()">
+    <button class="btn btn-info">Next</button>
+  </li>
+</ul>
+
+
+<div class="col-sm-12" selektovan-polaznik [polaznik]="selektovanPolaznik"></div>

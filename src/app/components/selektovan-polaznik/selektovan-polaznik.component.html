@@ -1,0 +1,15 @@
+<div *ngIf="polaznik">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Selektovan polaznik
+            <button class="btn" [ngClass]="{'btn-danger': !polaznik.predavac,'btn-success':polaznik.predavac}">Predavač</button>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item">Id: {{polaznik.id}}</li>
+                <li class="list-group-item">Ime: {{polaznik.ime}}</li>
+                <li class="list-group-item">Prezime: {{polaznik.prezime}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
